@@ -1,0 +1,360 @@
+USE [master]
+GO
+/****** Object:  Database [BD_Planilla_Pichari]    Script Date: 01/06/2023 10:58:33 ******/
+CREATE DATABASE [BD_Planilla_Pichari]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BD_Planilla_Pichari', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\BD_Planilla_Pichari.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'BD_Planilla_Pichari_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\BD_Planilla_Pichari_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [BD_Planilla_Pichari].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET RECOVERY FULL 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET  MULTI_USER 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'BD_Planilla_Pichari', N'ON'
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET QUERY_STORE = OFF
+GO
+USE [BD_Planilla_Pichari]
+GO
+/****** Object:  Table [dbo].[Afiliacion]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Afiliacion](
+	[id_Afiliacion] [int] NOT NULL,
+	[Nom_Afiliacion] [varchar](125) NOT NULL,
+	[Tipo_Comision] [varchar](125) NOT NULL,
+ CONSTRAINT [PK_Afiliacion] PRIMARY KEY CLUSTERED 
+(
+	[id_Afiliacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cargo]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cargo](
+	[id_Cargo] [int] NOT NULL,
+	[Nombre_Cargo] [varchar](125) NULL,
+	[id_Planilla] [int] NOT NULL,
+ CONSTRAINT [PK_Cargo] PRIMARY KEY CLUSTERED 
+(
+	[id_Cargo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Clasificador]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Clasificador](
+	[id_Clasificador] [int] NOT NULL,
+	[Nom_Clasificador] [varchar](125) NOT NULL,
+	[Codigo] [int] NOT NULL,
+ CONSTRAINT [PK_Clasificador] PRIMARY KEY CLUSTERED 
+(
+	[id_Clasificador] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Descuento]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Descuento](
+	[id_Descuento] [int] NOT NULL,
+	[DAPED] [varchar](125) NOT NULL,
+	[VT] [varchar](125) NOT NULL,
+	[TDT] [varchar](125) NOT NULL,
+	[VC] [varchar](125) NOT NULL,
+	[D_Elaborados] [varchar](125) NOT NULL,
+	[RDM] [varchar](125) NOT NULL,
+	[id_Descuento_Trab] [int] NOT NULL,
+	[Sub_Total_Desc] [varchar](125) NOT NULL,
+	[Neto_Pagar] [varchar](125) NOT NULL,
+	[Firmas] [varchar](125) NOT NULL,
+	[Aport_EsSalud] [varchar](500) NOT NULL,
+ CONSTRAINT [PK_Descuento] PRIMARY KEY CLUSTERED 
+(
+	[id_Descuento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Descuento_Trab]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Descuento_Trab](
+	[id_Descuento_Trab] [int] NOT NULL,
+	[SNP] [nvarchar](500) NOT NULL,
+	[AFP_integ] [nvarchar](400) NOT NULL,
+	[AFP_prof] [nvarchar](400) NOT NULL,
+	[AFP_prima] [nvarchar](400) NOT NULL,
+	[AFP_habitad] [nvarchar](400) NOT NULL,
+	[Tardanza_Falta_LSG] [nvarchar](400) NOT NULL,
+	[Descuento_Judicial] [nvarchar](400) NOT NULL,
+	[Descuento_Rimac] [nvarchar](400) NOT NULL,
+	[I_R_STA_CAT] [nvarchar](400) NOT NULL,
+	[id_Afiliacion] [int] NOT NULL,
+ CONSTRAINT [PK_Descuento_Trab] PRIMARY KEY CLUSTERED 
+(
+	[id_Descuento_Trab] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Fechas_Dias]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Fechas_Dias](
+	[id_Fechas_Dias] [int] NOT NULL,
+	[Fecha_Ingreso] [date] NOT NULL,
+	[Dias_Laborados] [date] NOT NULL,
+	[Dias_NoTrabajados] [date] NOT NULL,
+ CONSTRAINT [PK_Fechas_Dias] PRIMARY KEY CLUSTERED 
+(
+	[id_Fechas_Dias] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Nivel_Remuneramiento]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Nivel_Remuneramiento](
+	[id_Nivel_Rem] [int] NOT NULL,
+	[Nombre_Nivel_Rem] [varchar](125) NOT NULL,
+	[Cargo] [varchar](125) NOT NULL,
+ CONSTRAINT [PK_Nivel_Remuneramiento] PRIMARY KEY CLUSTERED 
+(
+	[id_Nivel_Rem] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Nivel_Remunerativo]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Nivel_Remunerativo](
+	[id_Nivel_Remunerativo] [int] NOT NULL,
+	[Nombre_Nivel_Rem] [varchar](1000) NOT NULL,
+	[Codigo] [int] NOT NULL,
+ CONSTRAINT [PK_Nivel_Remunerativo] PRIMARY KEY CLUSTERED 
+(
+	[id_Nivel_Remunerativo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pagos]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pagos](
+	[id_Pagos] [int] NOT NULL,
+	[id_Descuento_Trab] [int] NULL,
+	[BEDS] [money] NULL,
+	[CQRB] [money] NULL,
+	[BF] [money] NULL,
+	[TPH] [money] NULL,
+	[RB] [money] NULL,
+	[PPC] [money] NULL,
+	[RT] [money] NULL,
+	[BE] [money] NULL,
+	[B_OTROS] [money] NULL,
+	[RU] [money] NULL,
+	[NMUS] [money] NULL,
+	[BDP] [money] NULL,
+	[Total] [money] NULL,
+ CONSTRAINT [PK_Pagos] PRIMARY KEY CLUSTERED 
+(
+	[id_Pagos] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Planilla]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Planilla](
+	[id_Planilla] [int] NOT NULL,
+	[Nom_Planilla] [varchar](45) NOT NULL,
+	[Nom_Proyecto] [varchar](125) NOT NULL,
+ CONSTRAINT [PK_Planilla] PRIMARY KEY CLUSTERED 
+(
+	[id_Planilla] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tipo_Doc]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tipo_Doc](
+	[id_Tipo_Doc] [int] NOT NULL,
+	[Nombre_Tipo_Doc] [varchar](125) NULL,
+ CONSTRAINT [PK_Tipo_Doc] PRIMARY KEY CLUSTERED 
+(
+	[id_Tipo_Doc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Trabajador]    Script Date: 01/06/2023 10:58:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Trabajador](
+	[id_Trabajador] [int] NOT NULL,
+	[Cod_Trabajador] [int] NOT NULL,
+	[Sec_FVN] [varchar](125) NOT NULL,
+	[id_Clasificador] [int] NOT NULL,
+	[APaterno] [varchar](125) NOT NULL,
+	[AMaterno] [varchar](125) NOT NULL,
+	[Nombre] [varchar](125) NOT NULL,
+	[Dni] [varchar](125) NOT NULL,
+	[id_Tipo_Doc] [int] NOT NULL,
+	[numDoc] [int] NOT NULL,
+	[id_Cargo] [varchar](125) NOT NULL,
+	[id_Planilla] [int] NOT NULL,
+	[Rem_IMP] [varchar](125) NOT NULL,
+	[id_Nivel_Rem] [int] NOT NULL,
+	[Rem_Mensual] [varchar](125) NOT NULL,
+	[id_Pagos] [int] NOT NULL,
+ CONSTRAINT [PK_Trabajador] PRIMARY KEY CLUSTERED 
+(
+	[id_Trabajador] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Cargo]  WITH CHECK ADD  CONSTRAINT [FK_Cargo_Planilla] FOREIGN KEY([id_Planilla])
+REFERENCES [dbo].[Planilla] ([id_Planilla])
+GO
+ALTER TABLE [dbo].[Cargo] CHECK CONSTRAINT [FK_Cargo_Planilla]
+GO
+ALTER TABLE [dbo].[Descuento]  WITH CHECK ADD  CONSTRAINT [FK_Descuento_Descuento_Trab] FOREIGN KEY([id_Descuento_Trab])
+REFERENCES [dbo].[Descuento_Trab] ([id_Descuento_Trab])
+GO
+ALTER TABLE [dbo].[Descuento] CHECK CONSTRAINT [FK_Descuento_Descuento_Trab]
+GO
+ALTER TABLE [dbo].[Descuento_Trab]  WITH CHECK ADD  CONSTRAINT [FK_Descuento_Trab_Afiliacion] FOREIGN KEY([id_Afiliacion])
+REFERENCES [dbo].[Afiliacion] ([id_Afiliacion])
+GO
+ALTER TABLE [dbo].[Descuento_Trab] CHECK CONSTRAINT [FK_Descuento_Trab_Afiliacion]
+GO
+ALTER TABLE [dbo].[Pagos]  WITH CHECK ADD  CONSTRAINT [FK_Pagos_Descuento_Trab] FOREIGN KEY([id_Descuento_Trab])
+REFERENCES [dbo].[Descuento_Trab] ([id_Descuento_Trab])
+GO
+ALTER TABLE [dbo].[Pagos] CHECK CONSTRAINT [FK_Pagos_Descuento_Trab]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Clasificador] FOREIGN KEY([id_Clasificador])
+REFERENCES [dbo].[Clasificador] ([id_Clasificador])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Clasificador]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Nivel_Remuneramiento] FOREIGN KEY([id_Nivel_Rem])
+REFERENCES [dbo].[Nivel_Remuneramiento] ([id_Nivel_Rem])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Nivel_Remuneramiento]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Nivel_Remunerativo] FOREIGN KEY([id_Nivel_Rem])
+REFERENCES [dbo].[Nivel_Remunerativo] ([id_Nivel_Remunerativo])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Nivel_Remunerativo]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Pagos] FOREIGN KEY([id_Pagos])
+REFERENCES [dbo].[Pagos] ([id_Pagos])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Pagos]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Planilla] FOREIGN KEY([id_Planilla])
+REFERENCES [dbo].[Planilla] ([id_Planilla])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Planilla]
+GO
+ALTER TABLE [dbo].[Trabajador]  WITH CHECK ADD  CONSTRAINT [FK_Trabajador_Tipo_Doc] FOREIGN KEY([id_Tipo_Doc])
+REFERENCES [dbo].[Tipo_Doc] ([id_Tipo_Doc])
+GO
+ALTER TABLE [dbo].[Trabajador] CHECK CONSTRAINT [FK_Trabajador_Tipo_Doc]
+GO
+USE [master]
+GO
+ALTER DATABASE [BD_Planilla_Pichari] SET  READ_WRITE 
+GO
